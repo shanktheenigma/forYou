@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Loml</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #fde8f0 0%, #f3e8fd 40%, #fde8e8 70%, #e8f0fd 100%);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #5a3a5a;
+  }
+
+  .hearts-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .heart-float {
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(-10deg) scale(0.8); opacity: 0; }
+    10%  { opacity: 0.5; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-110vh) rotate(10deg) scale(1.2); opacity: 0; }
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-heart {
+    margin: 0 auto 2rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    /* Desktop */
+    width: 120px;
+    height: 120px;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%  { transform: scale(1.18); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.12); }
+    56%  { transform: scale(1); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #c26b8a;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+    animation: fadeSlideUp 1.2s ease both;
+    /* Desktop */
+    font-size: 5rem;
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    color: #b88ab8;
+    animation: fadeSlideUp 1.2s 0.3s ease both;
+    opacity: 0;
+    /* Desktop */
+    font-size: 1.6rem;
+  }
+  .hero .date-badge {
+    margin-top: 2rem;
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(194,107,138,0.25);
+    border-radius: 99px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c26b8a;
+    animation: fadeSlideUp 1.2s 0.6s ease both;
+    opacity: 0;
+    /* Desktop */
+    font-size: 0.85rem;
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    /* Desktop */
+    padding: 5rem 2rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    color: #c26b8a;
+    text-align: center;
+    /* Desktop */
+    font-size: 2.6rem;
+    margin-bottom: 3rem;
+  }
+  .section-title span {
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b88ab8;
+    margin-bottom: 0.5rem;
+    /* Desktop */
+    font-size: 1rem;
+  }
+
+  /* REASONS GRID */
+  .reasons-grid {
+    display: grid;
+    gap: 1.5rem;
+    /* Desktop: 3 cols */
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .reason-card {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(194,107,138,0.18);
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: popIn 0.6s ease both;
+    /* Desktop */
+    padding: 2rem 1.5rem;
+  }
+  .reason-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(194,107,138,0.18);
+  }
+  .reason-num {
+    font-family: 'Playfair Display', serif;
+    color: rgba(194,107,138,0.2);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    /* Desktop */
+    font-size: 3rem;
+  }
+  .reason-text {
+    line-height: 1.65;
+    color: #7a4a7a;
+    /* Desktop */
+    font-size: 1rem;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* PHOTOS */
+  .photos-strip {
+    display: grid;
+    gap: 1.2rem;
+    /* Desktop: 3 cols */
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .photo-frame {
+    aspect-ratio: 3/4;
+    background: rgba(255,255,255,0.6);
+    border: 2px dashed rgba(194,107,138,0.35);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .photo-frame:hover { border-color: #c26b8a; background: rgba(255,255,255,0.85); }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: none; }
+  .photo-frame.has-photo img { display: block; }
+  .photo-frame.has-photo .frame-placeholder { display: none; }
+  .frame-placeholder { text-align: center; padding: 1rem; }
+  .frame-placeholder svg { margin-bottom: 0.5rem; }
+  .frame-placeholder p { font-size: 0.78rem; color: #c26b8a; letter-spacing: 0.05em; }
+  .photo-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(194,107,138,0.7), transparent);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    padding: 1.5rem 0.8rem 0.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    /* Desktop */
+    font-size: 0.9rem;
+  }
+  .photo-frame.has-photo:hover .photo-label { opacity: 1; }
+  .photo-input { display: none; }
+
+  /* LOVE LETTER */
+  .love-letter {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(184,138,184,0.25);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    /* Desktop */
+    padding: 3rem;
+  }
+  .love-letter::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    color: rgba(194,107,138,0.08);
+    position: absolute;
+    top: -2rem;
+    left: 1rem;
+    line-height: 1;
+    pointer-events: none;
+    /* Desktop */
+    font-size: 12rem;
+  }
+  .love-letter p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    line-height: 2;
+    color: #7a4a7a;
+    position: relative;
+    z-index: 1;
+    /* Desktop */
+    font-size: 1.2rem;
+  }
+  .love-letter .signature {
+    margin-top: 2rem;
+    text-align: right;
+    color: #c26b8a;
+    font-style: normal;
+    /* Desktop */
+    font-size: 1.4rem;
+  }
+
+  /* SPARKLE ROW */
+  .sparkle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 2rem;
+    font-family: 'Playfair Display', serif;
+    color: #c26b8a;
+    text-align: center;
+    font-style: italic;
+    flex-wrap: wrap;
+    /* Desktop */
+    font-size: 1.5rem;
+  }
+
+  .upload-hint {
+    text-align: center;
+    color: #b88ab8;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    /* Desktop */
+    font-size: 0.82rem;
+  }
+
+  footer {
+    text-align: center;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #b88ab8;
+    /* Desktop */
+    padding: 3rem 2rem 4rem;
+    font-size: 0.82rem;
+  }
+
+  /* =====================
+     TABLET  (≤ 768px)
+  ===================== */
+  @media (max-width: 768px) {
+    .hero { padding: 2.5rem 1.25rem; min-height: 90vh; }
+    .hero-heart { width: 90px; height: 90px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: 3.2rem; }
+    .hero h2 { font-size: 1.15rem; }
+    .hero .date-badge { font-size: 0.75rem; padding: 0.45rem 1.2rem; margin-top: 1.5rem; }
+
+    .section { padding: 3.5rem 1.5rem; }
+    .section-title { font-size: 2rem; margin-bottom: 2rem; }
+    .section-title span { font-size: 0.85rem; }
+
+    .reasons-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .reason-card { padding: 1.5rem 1rem; }
+    .reason-num { font-size: 2.4rem; }
+    .reason-text { font-size: 0.95rem; }
+
+    .photos-strip { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .photo-label { font-size: 0.82rem; }
+
+    .love-letter { padding: 2rem 1.5rem; }
+    .love-letter::before { font-size: 8rem; }
+    .love-letter p { font-size: 1.05rem; line-height: 1.9; }
+    .love-letter .signature { font-size: 1.2rem; }
+
+    .sparkle-row { font-size: 1.1rem; padding: 2rem 1.5rem; gap: 0.75rem; }
+    .upload-hint { font-size: 0.78rem; }
+    footer { padding: 2rem 1.5rem 3rem; font-size: 0.75rem; }
+  }
+
+  /* =====================
+     MOBILE  (≤ 480px)
+  ===================== */
+  @media (max-width: 480px) {
+    .hero { padding: 2rem 1rem; min-height: 85vh; }
+    .hero-heart { width: 72px; height: 72px; margin-bottom: 1.25rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero h2 { font-size: 0.95rem; }
+    .hero .date-badge { font-size: 0.68rem; padding: 0.4rem 1rem; margin-top: 1.2rem; }
+
+    .section { padding: 2.5rem 1rem; }
+    .section-title { font-size: 1.6rem; margin-bottom: 1.5rem; }
+    .section-title span { font-size: 0.75rem; }
+
+    .reasons-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+    .reason-card { padding: 1.25rem 1rem; border-radius: 14px; }
+    .reason-num { font-size: 2rem; }
+    .reason-text { font-size: 0.9rem; }
+
+    .photos-strip { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .photo-frame { border-radius: 12px; }
+    .photo-label { font-size: 0.75rem; padding: 1rem 0.5rem 0.5rem; }
+
+    .love-letter { padding: 1.5rem 1.25rem; border-radius: 16px; }
+    .love-letter::before { font-size: 5rem; top: -1rem; }
+    .love-letter p { font-size: 0.95rem; line-height: 1.85; }
+    .love-letter .signature { font-size: 1.05rem; margin-top: 1.5rem; }
+
+    .sparkle-row { font-size: 0.95rem; padding: 1.5rem 1rem; gap: 0.5rem; }
+    .sparkle-row svg { width: 20px; height: 18px; }
+    .upload-hint { font-size: 0.75rem; margin-bottom: 1.25rem; }
+    footer { padding: 1.5rem 1rem 2.5rem; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-heart">
+      <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hg" cx="50%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#f9b8ce"/>
+            <stop offset="100%" stop-color="#c26b8a"/>
+          </radialGradient>
+        </defs>
+        <path d="M60 100 C60 100 8 65 8 35 C8 18 22 8 38 8 C48 8 56 14 60 20 C64 14 72 8 82 8 C98 8 112 18 112 35 C112 65 60 100 60 100Z" fill="url(#hg)" stroke="rgba(194,107,138,0.3)" stroke-width="1"/>
+        <path d="M40 32 C38 25 32 22 28 26" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <h1>For My Loml</h1>
+    <h2>the love of my life &amp; the beat of my heart</h2>
+    <div class="date-badge">always &amp; forever</div>
+  </div>
+
+  <!-- REASONS -->
+  <div class="section">
+    <h2 class="section-title"><span>a little list</span>Reasons I Love You</h2>
+    <div class="reasons-grid">
+      <div class="reason-card" style="animation-delay:0.1s">
+        <div class="reason-num">01</div>
+        <p class="reason-text">The way your eyes light up when you're excited about something — it's my favourite view in the whole world.</p>
+      </div>
+      <div class="reason-card" style="animation-delay:0.2s">
+        <div class="reason-num">02</div>
+        <p class="reason-text">Your laugh is genuinely the best sound I've ever heard. I'd do anything just to hear it again.</p>
+      </div>
+      <div class="reason-card" style="animation-delay:0.3s">
+        <div class="reason-num">03</div>
+        <p class="reason-text">How kind and gentle you are — with me, with others, with every little thing you touch.</p>
+      </div>
+      <div class="reason-card" style="animation-delay:0.4s">
+        <div class="reason-num">04</div>
+        <p class="reason-text">You make ordinary days feel like a dream. Every moment with you is my favourite memory in the making.</p>
+      </div>
+      <div class="reason-card" style="animation-delay:0.5s">
+        <div class="reason-num">05</div>
+        <p class="reason-text">Your hugs feel like home — like nothing in the world could go wrong when I'm in your arms.</p>
+      </div>
+      <div class="reason-card" style="animation-delay:0.6s">
+        <div class="reason-num">06</div>
+        <p class="reason-text">Simply for being you — perfectly, wonderfully, beautifully you. That alone is more than enough.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTOS -->
+  <div class="section" style="padding-top: 2rem;">
+    <h2 class="section-title"><span>us in pictures</span>Our Moments</h2>
+    <p class="upload-hint">Click any frame to add a photo ✦</p>
+    <div class="photos-strip" id="photoStrip">
+      <label class="photo-frame" id="frame0">
+        <input type="file" class="photo-input" accept="image/*" onchange="loadPhoto(event,'frame0')">
+        <img alt=""><div class="frame-placeholder"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 26 L5 6 Q5 5 6 5 L26 5 Q27 5 27 6 L27 26 Q27 27 26 27 L6 27 Q5 27 5 26Z" stroke="#c26b8a" stroke-width="1" fill="rgba(194,107,138,0.07)"/><circle cx="11" cy="12" r="2.5" stroke="#c26b8a" stroke-width="1" fill="none"/><path d="M5 22 L11 17 L16 21 L21 15 L27 22" stroke="#c26b8a" stroke-width="1" fill="none"/></svg><p>Add photo</p></div>
+        <div class="photo-label">A smile I live for</div>
+      </label>
+      <label class="photo-frame" id="frame1">
+        <input type="file" class="photo-input" accept="image/*" onchange="loadPhoto(event,'frame1')">
+        <img alt=""><div class="frame-placeholder"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 26 L5 6 Q5 5 6 5 L26 5 Q27 5 27 6 L27 26 Q27 27 26 27 L6 27 Q5 27 5 26Z" stroke="#c26b8a" stroke-width="1" fill="rgba(194,107,138,0.07)"/><circle cx="11" cy="12" r="2.5" stroke="#c26b8a" stroke-width="1" fill="none"/><path d="M5 22 L11 17 L16 21 L21 15 L27 22" stroke="#c26b8a" stroke-width="1" fill="none"/></svg><p>Add photo</p></div>
+        <div class="photo-label">My favourite person</div>
+      </label>
+      <label class="photo-frame" id="frame2">
+        <input type="file" class="photo-input" accept="image/*" onchange="loadPhoto(event,'frame2')">
+        <img alt=""><div class="frame-placeholder"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 26 L5 6 Q5 5 6 5 L26 5 Q27 5 27 6 L27 26 Q27 27 26 27 L6 27 Q5 27 5 26Z" stroke="#c26b8a" stroke-width="1" fill="rgba(194,107,138,0.07)"/><circle cx="11" cy="12" r="2.5" stroke="#c26b8a" stroke-width="1" fill="none"/><path d="M5 22 L11 17 L16 21 L21 15 L27 22" stroke="#c26b8a" stroke-width="1" fill="none"/></svg><p>Add photo</p></div>
+        <div class="photo-label">Always golden with you</div>
+      </label>
+      <label class="photo-frame" id="frame3">
+        <input type="file" class="photo-input" accept="image/*" onchange="loadPhoto(event,'frame3')">
+        <img alt=""><div class="frame-placeholder"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 26 L5 6 Q5 5 6 5 L26 5 Q27 5 27 6 L27 26 Q27 27 26 27 L6 27 Q5 27 5 26Z" stroke="#c26b8a" stroke-width="1" fill="rgba(194,107,138,0.07)"/><circle cx="11" cy="12" r="2.5" stroke="#c26b8a" stroke-width="1" fill="none"/><path d="M5 22 L11 17 L16 21 L21 15 L27 22" stroke="#c26b8a" stroke-width="1" fill="none"/></svg><p>Add photo</p></div>
+        <div class="photo-label">My safe place</div>
+      </label>
+      <label class="photo-frame" id="frame4">
+        <input type="file" class="photo-input" accept="image/*" onchange="loadPhoto(event,'frame4')">
+        <img alt=""><div class="frame-placeholder"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 26 L5 6 Q5 5 6 5 L26 5 Q27 5 27 6 L27 26 Q27 27 26 27 L6 27 Q5 27 5 26Z" stroke="#c26b8a" stroke-width="1" fill="rgba(194,107,138,0.07)"/><circle cx="11" cy="12" r="2.5" stroke="#c26b8a" stroke-width="1" fill="none"/><path d="M5 22 L11 17 L16 21 L21 15 L27 22" stroke="#c26b8a" stroke-width="1" fill="none"/></svg><p>Add photo</p></div>
+        <div class="photo-label">All my adventures, with you</div>
+      </label>
+      <label class="photo-frame" id="frame5">
+        <input type="file" class="photo-input" accept="image/*" onchange="loadPhoto(event,'frame5')">
+        <img alt=""><div class="frame-placeholder"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 26 L5 6 Q5 5 6 5 L26 5 Q27 5 27 6 L27 26 Q27 27 26 27 L6 27 Q5 27 5 26Z" stroke="#c26b8a" stroke-width="1" fill="rgba(194,107,138,0.07)"/><circle cx="11" cy="12" r="2.5" stroke="#c26b8a" stroke-width="1" fill="none"/><path d="M5 22 L11 17 L16 21 L21 15 L27 22" stroke="#c26b8a" stroke-width="1" fill="none"/></svg><p>Add photo</p></div>
+        <div class="photo-label">My whole heart</div>
+      </label>
+    </div>
+  </div>
+
+  <!-- SPARKLE -->
+  <div class="sparkle-row">
+    <svg width="28" height="26" viewBox="0 0 28 26" fill="none"><path d="M14 2 C14 2 8 10 2 13 C8 16 14 24 14 24 C14 24 20 16 26 13 C20 10 14 2 14 2Z" fill="#c26b8a" opacity="0.4"/></svg>
+    <span>"In all the world, there is no heart for me like yours."</span>
+    <svg width="28" height="26" viewBox="0 0 28 26" fill="none"><path d="M14 2 C14 2 8 10 2 13 C8 16 14 24 14 24 C14 24 20 16 26 13 C20 10 14 2 14 2Z" fill="#b88ab8" opacity="0.4"/></svg>
+  </div>
+
+  <!-- LOVE LETTER -->
+  <div class="section" style="padding-top: 1rem;">
+    <h2 class="section-title"><span>written with love</span>A Letter to You</h2>
+    <div class="love-letter">
+      <p>
+        My dearest Loml,<br><br>
+        I don't think words will ever be enough to tell you what you mean to me — but I'm going to try anyway, because you deserve to hear it.<br><br>
+        Every single day with you is a gift I didn't know I needed. You have this beautiful way of making the whole world feel softer, warmer, and so much more worth living in. With you, I feel seen. I feel safe. I feel like the best version of myself.<br><br>
+        You are my calm on the hardest days, my laughter on the easiest ones, and my favourite thought at every hour in between. I fall for you a little more with every look, every word, every quiet moment we share.<br><br>
+        Thank you for choosing me, again and again. Thank you for the love you give so freely. Thank you for simply being you — because you, just as you are, are everything.<br><br>
+        I love you more than I'll ever know how to say.
+      </p>
+      <div class="signature">— always yours ♡</div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding: 2rem 0 0;">
+    <svg width="60" height="55" viewBox="0 0 60 55" xmlns="http://www.w3.org/2000/svg" style="animation: heartbeat 1.5s ease-in-out infinite; display:inline-block;">
+      <path d="M30 50 C30 50 4 33 4 18 C4 9 11 4 19 4 C24 4 28 7 30 10 C32 7 36 4 41 4 C49 4 56 9 56 18 C56 33 30 50 30 50Z" fill="#c26b8a" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <footer>Made with love, just for you &nbsp;✦&nbsp; Loml, forever &amp; always</footer>
+
+</div>
+
+<script>
+  const bg = document.getElementById('heartsBg');
+  const colors = ['#f9b8ce','#e8b8f9','#f9c8b8','#b8d0f9','#c26b8a','#b88ab8'];
+  const hearts = ['♥','❤','💕','💗','💖','💝'];
+  for (let i = 0; i < 28; i++) {
+    const el = document.createElement('div');
+    el.className = 'heart-float';
+    el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (8 + Math.random() * 14) + 's';
+    el.style.animationDelay = (Math.random() * 18) + 's';
+    el.style.fontSize = (13 + Math.random() * 18) + 'px';
+    el.style.color = colors[Math.floor(Math.random() * colors.length)];
+    bg.appendChild(el);
+  }
+
+  function loadPhoto(event, frameId) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const frame = document.getElementById(frameId);
+    const img = frame.querySelector('img');
+    const reader = new FileReader();
+    reader.onload = e => { img.src = e.target.result; frame.classList.add('has-photo'); };
+    reader.readAsDataURL(file);
+  }
+
+  const cards = document.querySelectorAll('.reason-card');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  cards.forEach(c => { c.style.animationPlayState = 'paused'; obs.observe(c); });
+</script>
+</body>
+</html>
