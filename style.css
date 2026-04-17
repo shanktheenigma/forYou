@@ -18,7 +18,6 @@ body {
   color: #5a3a5a;
 }
 
-/* Floating hearts background */
 .hearts-bg {
   position: fixed;
   top: 0;
@@ -54,13 +53,11 @@ body {
   }
 }
 
-/* Page wrapper */
 .page {
   position: relative;
   z-index: 1;
 }
 
-/* HERO */
 .hero {
   height: 100vh;
   display: flex;
@@ -141,7 +138,6 @@ body {
   }
 }
 
-/* Section container */
 .section {
   max-width: 900px;
   margin: 0 auto;
@@ -165,130 +161,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Reasons grid */
-.reasons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-}
-.reason-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(194, 107, 138, 0.18);
-  border-radius: 20px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-  animation: popIn 0.6s ease both;
-}
-.reason-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(194, 107, 138, 0.18);
-}
-.reason-num {
-  font-family: "Playfair Display", serif;
-  font-size: 3rem;
-  color: rgba(194, 107, 138, 0.2);
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-.reason-text {
-  font-size: 1rem;
-  line-height: 1.65;
-  color: #7a4a7a;
-}
-@keyframes popIn {
-  from {
-    opacity: 0;
-    transform: scale(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Photo strip */
-.photos-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-}
-@media (max-width: 600px) {
-  .photos-strip {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-.photo-frame {
-  aspect-ratio: 3/4;
-  background: rgba(255, 255, 255, 0.6);
-  border: 2px dashed rgba(194, 107, 138, 0.35);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition:
-    border-color 0.3s,
-    background 0.3s;
-}
-.photo-frame:hover {
-  border-color: #c26b8a;
-  background: rgba(255, 255, 255, 0.85);
-}
-.photo-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 14px;
-  display: none;
-}
-.photo-frame.has-photo img {
-  display: block;
-}
-.photo-frame.has-photo .frame-placeholder {
-  display: none;
-}
-.frame-placeholder {
-  text-align: center;
-  padding: 1rem;
-}
-.frame-placeholder svg {
-  margin-bottom: 0.5rem;
-}
-.frame-placeholder p {
-  font-size: 0.78rem;
-  color: #c26b8a;
-  letter-spacing: 0.05em;
-}
-.photo-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(194, 107, 138, 0.7), transparent);
-  color: white;
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  padding: 1.5rem 0.8rem 0.7rem;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.photo-frame.has-photo:hover .photo-label {
-  opacity: 1;
-}
-.photo-input {
-  display: none;
-}
-
-/* Love letter */
 .love-letter {
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
@@ -348,7 +220,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 3rem 2rem 4rem;
@@ -358,7 +229,6 @@ footer {
   color: #b88ab8;
 }
 
-/* Upload hint */
 .upload-hint {
   text-align: center;
   font-size: 0.82rem;
@@ -397,28 +267,6 @@ footer {
   }
   .section-title span {
     font-size: 0.85rem;
-  }
-
-  .reasons-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  .reason-card {
-    padding: 1.5rem 1rem;
-  }
-  .reason-num {
-    font-size: 2.4rem;
-  }
-  .reason-text {
-    font-size: 0.95rem;
-  }
-
-  .photos-strip {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  .photo-label {
-    font-size: 0.82rem;
   }
 
   .love-letter {
@@ -482,33 +330,6 @@ footer {
   }
   .section-title span {
     font-size: 0.75rem;
-  }
-
-  .reasons-grid {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
-  }
-  .reason-card {
-    padding: 1.25rem 1rem;
-    border-radius: 14px;
-  }
-  .reason-num {
-    font-size: 2rem;
-  }
-  .reason-text {
-    font-size: 0.9rem;
-  }
-
-  .photos-strip {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-  .photo-frame {
-    border-radius: 12px;
-  }
-  .photo-label {
-    font-size: 0.75rem;
-    padding: 1rem 0.5rem 0.5rem;
   }
 
   .love-letter {

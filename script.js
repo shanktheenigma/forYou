@@ -20,36 +20,3 @@ for (let i = 0; i < 28; i++) {
   el.style.color = colors[Math.floor(Math.random() * colors.length)];
   bg.appendChild(el);
 }
-
-// Photo upload
-function loadPhoto(event, frameId, label) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const frame = document.getElementById(frameId);
-  const img = frame.querySelector("img");
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    img.src = e.target.result;
-    frame.classList.add("has-photo");
-  };
-  reader.readAsDataURL(file);
-  event.stopPropagation();
-}
-
-// Stagger reason cards on scroll (simple observer)
-const cards = document.querySelectorAll(".reason-card");
-const obs = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.style.animationPlayState = "running";
-        obs.unobserve(e.target);
-      }
-    });
-  },
-  { threshold: 0.15 },
-);
-cards.forEach((c) => {
-  c.style.animationPlayState = "paused";
-  obs.observe(c);
-});
